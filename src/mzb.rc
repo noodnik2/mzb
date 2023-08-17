@@ -1,0 +1,99 @@
+//Microsoft App Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+MIDIBOX DIALOG DISCARDABLE  0, 0, 215, 130
+STYLE DS_MODALFRAME | WS_POPUP | WS_VISIBLE | WS_CAPTION | WS_SYSMENU
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "&OK",IDOK,169,7,41,14,WS_GROUP
+    DEFPUSHBUTTON   "&Cancel",IDCANCEL,169,26,41,14
+    DEFPUSHBUTTON   "&About",IDABOUT,169,46,41,14
+    DEFPUSHBUTTON   "E&xit",IDEXIT,169,65,41,14
+    CONTROL         "Auto",IDC_CKAUTO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,
+                    175,96,29,10
+    GROUPBOX        "Set",-1,4,2,160,32,WS_GROUP
+    EDITTEXT        IDC_SSETNAME,11,13,112,16,ES_CENTER | ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT 
+                    WS_TABSTOP
+    DEFPUSHBUTTON   "&Load",IDLOADSET,126,8,33,11,WS_GROUP
+    DEFPUSHBUTTON   "&Save",IDSAVESET,126,21,33,11
+    GROUPBOX        "Song",-1,4,36,160,89,WS_GROUP
+    EDITTEXT        IDC_SCOMMENT,11,64,112,24,ES_CENTER | ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT 
+                    WS_TABSTOP
+    COMBOBOX        IDC_CBFLIST,12,49,109,56,CBS_DROPDOWNLIST | WS_VSCROLL | 
+                    WS_TABSTOP
+    SCROLLBAR       IDC_SBSCROLLSONG,12,94,145,8,WS_GROUP | WS_TABSTOP
+    DEFPUSHBUTTON   "|<<",IDPREV,12,105,19,14,WS_GROUP
+    DEFPUSHBUTTON   "<<",IDREW,33,105,19,14
+    DEFPUSHBUTTON   "[]",IDSTOP,54,105,19,14
+    DEFPUSHBUTTON   "||",IDPAUSE,75,105,19,14
+    DEFPUSHBUTTON   ">",IDPLAY,96,105,19,14
+    DEFPUSHBUTTON   ">>",IDFF,117,105,19,14
+    DEFPUSHBUTTON   ">>|",IDNEXT,138,105,19,14
+    DEFPUSHBUTTON   "&Save",IDSAVE,126,48,33,14,WS_GROUP
+    EDITTEXT        IDC_MAXTIME,126,81,31,12,ES_RIGHT | ES_MULTILINE | 
+                    ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+END
+
+#ifdef APSTUDIO_INVOKED
+//////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // APSTUDIO_INVOKED
+
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+IDI_ICONMZB             ICON    DISCARDABLE     "ICONMZB.ICO"
+
+#ifndef APSTUDIO_INVOKED
+////////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+

@@ -1,0 +1,19 @@
+;
+;	mzb.def
+;
+
+NAME		MZB
+
+DESCRIPTION	'MIDI Zuke Box - Copyright (C) 1996, by Marty Ross'
+EXETYPE		WINDOWS
+CODE		PRELOAD MOVEABLE DISCARDABLE
+DATA		PRELOAD MOVEABLE MULTIPLE
+
+HEAPSIZE	4096
+
+EXPORTS
+	DialogProc
+
+;
+;	end of mzb.def
+;
