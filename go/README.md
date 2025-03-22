@@ -23,7 +23,7 @@ which I was able to try since it still supports older versions of MacOS
 (which I was using when I was looking around) via its
 [Legacy repo](https://github.com/nitinseshadri/NSMIDIPlayer-Legacy).
 
-## `cmd/player`
+## `cmd/player` - Proof Of Concept
 
 The first CLI (PoC) created is `cmd/player`.  To run it:
 
