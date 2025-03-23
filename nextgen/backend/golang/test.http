@@ -1,0 +1,23 @@
+# GET    /api/midi-files           --> main.getMidiFiles (4 handlers)
+# GET    /api/midi-files/:id       --> main.getMidiFile (4 handlers)
+# PATCH  /api/midi-files/:id       --> main.updateMidiMetadata (4 handlers)
+# POST   /api/scan                 --> main.triggerScan (4 handlers)
+#Server running on port 8000
+#
+
+GET http://localhost:8000/api/midi-files
+
+###
+
+GET http://localhost:8000/api/midi-files
+
+###
+
+PATCH http://localhost:8000/api/midi-files/{id}
+
+###
+
+POST http://localhost:8000/api/midi-files/{id}
+
+###
+
