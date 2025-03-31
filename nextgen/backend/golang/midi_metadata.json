@@ -4,7 +4,9 @@
       "id": "005_alwa.mid",
       "name": "005_alwa.mid",
       "path": "/Users/martyross/repos/noodnik2/mzb/samples/src/240818-nuvi/005_alwa.mid",
-      "metadata": {}
+      "metadata": {
+        "rating": "4"
+      }
     },
     {
       "id": "01cncrto.mid",
@@ -22,7 +24,9 @@
       "id": "03vienna.mid",
       "name": "03vienna.mid",
       "path": "/Users/martyross/repos/noodnik2/mzb/samples/src/240818-nuvi/03vienna.mid",
-      "metadata": {}
+      "metadata": {
+        "genre": "asdasdas"
+      }
     },
     {
       "id": "04rhspdy.mid",

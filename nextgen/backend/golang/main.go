@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/fsnotify/fsnotify"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"os"
@@ -191,9 +192,14 @@ func main() {
 
 	// Setup router
 	r := gin.Default()
-	r.Use(func(c *gin.Context) {
-		c.Header("Access-Control-Allow-Origin", "*")
-	})
+	//r.Use(cors.Default())
+
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173"}, // Adjust to match your frontend
+		AllowMethods:     []string{"GET", "PATCH"},
+		AllowHeaders:     []string{"Content-Type"},
+		AllowCredentials: true,
+	}))
 
 	r.GET("/api/midi-files", getMidiFiles)
 	r.GET("/api/midi-files/:id", getMidiFile)

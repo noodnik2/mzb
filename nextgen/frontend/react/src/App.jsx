@@ -1,80 +1,95 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const API_URL = "http://127.0.0.1:8000/api";
+const API_URL = "http://localhost:8000/api/midi-files";
 
 function App() {
-    const [files, setFiles] = useState([]);
-    const [selectedFile, setSelectedFile] = useState(null);
-    const [metadata, setMetadata] = useState({});
+    const [midiFiles, setMidiFiles] = useState([]);
+    const [loading, setLoading] = useState(true);
 
+    console.log(`app`);
+
+    // Fetch data from backend
     useEffect(() => {
-        fetch(`${API_URL}/midi-files`)
+        console.log(`fetching({API_URL}`);
+        fetch(API_URL)
             .then((res) => res.json())
-            .then(setFiles);
+            .then((data) => {
+                setMidiFiles(data);
+                setLoading(false);
+            })
+            .catch((err) => console.error("Error fetching MIDI files:", err));
     }, []);
 
-    const selectFile = (file) => {
-        setSelectedFile(file);
-        setMetadata(file.metadata);
-    };
+    // Update metadata function
+    const updateMetadata = (id, field, value) => {
+        console.log(`updateMetadata`);
+        // Optimistically update UI
+        const updatedFiles = midiFiles.map((file) =>
+            file.id === id ? { ...file, metadata: { ...file.metadata, [field]: value } } : file
+        );
+        setMidiFiles(updatedFiles);
 
-    const updateMetadata = () => {
-        fetch(`${API_URL}/midi-files/${selectedFile.id}`, {
+        // Send update request to the backend
+        fetch(`${API_URL}/${id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(metadata),
+            body: JSON.stringify({ [field]: value }),
         })
-            .then((res) => res.json())
-            .then(updatedFile => {
-                setFiles(files.map(f => (f.id === updatedFile.id ? updatedFile : f)));
-                setSelectedFile(updatedFile);
+            .then((res) => {
+                console.info("Updated metadata");
+                if (!res.ok) throw new Error("Failed to update");
+                return res.json();
+            })
+            .catch((err) => {
+                console.error("Failed to update metadata:", err);
+                // Optionally: revert changes if the request fails
             });
     };
 
-    return (
-        <div className="p-4">
-            <h1 className="text-xl font-bold">MIDI Organizer</h1>
-            <div className="flex">
-                {/* File List */}
-                <div className="w-1/3">
-                    <h2 className="text-lg">Files</h2>
-                    <ul>
-                        {files.map(file => (
-                            <li key={file.id} className="cursor-pointer" onClick={() => selectFile(file)}>
-                                {file.name}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
+    if (loading) {
+        return <h1>Loading MIDI files...</h1>;
+    }
 
-                {/* Metadata Panel */}
-                <div className="w-2/3 p-4">
-                    {selectedFile ? (
-                        <div>
-                            <h2 className="text-lg">{selectedFile.name}</h2>
-                            <label>Genre:</label>
-                            <input
-                                type="text"
-                                value={metadata.genre || ""}
-                                onChange={(e) => setMetadata({ ...metadata, genre: e.target.value })}
-                                className="border p-1"
-                            />
-                            <label>Rating:</label>
+    return (
+        <div>
+            <h1>MIDI Organizer</h1>
+            <table border="1">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Path</th>
+                    <th>Rating</th>
+                    <th>Genre</th>
+                </tr>
+                </thead>
+                <tbody>
+                {midiFiles.map((file) => (
+                    <tr key={file.id}>
+                        <td>{file.name}</td>
+                        <td>{file.path}</td>
+                        <td>
                             <input
                                 type="number"
-                                value={metadata.rating || 0}
-                                onChange={(e) => setMetadata({ ...metadata, rating: Number(e.target.value) })}
-                                className="border p-1"
+                                value={file.metadata.rating || ""}
+                                onChange={(e) => {
+                                    updateMetadata(file.id, "rating", e.target.value);
+                                }}
                             />
-                            <button onClick={updateMetadata} className="bg-blue-500 text-white px-2 py-1 mt-2">
-                                Save
-                            </button>
-                        </div>
-                    ) : (
-                        <p>Select a file</p>
-                    )}
-                </div>
-            </div>
+                        </td>
+                        <td>
+                            <input
+                                type="text"
+                                value={file.metadata.genre || ""}
+                                onChange={(e) => {
+                                    console.log("Genre changed:", e.target.value);
+                                    updateMetadata(file.id, "genre", e.target.value);
+                                }}
+                            />
+                        </td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
         </div>
     );
 }

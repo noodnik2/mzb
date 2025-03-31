@@ -1,0 +1,43 @@
+# [GIN-debug] GET    /items                    --> main.getItems (4 handlers)
+# [GIN-debug] GET    /item/:id                 --> main.getItem (4 handlers)
+# [GIN-debug] PATCH  /item/:id                 --> main.updateItem (4 handlers)
+# [GIN-debug] POST   /item                     --> main.createItem (4 handlers)
+# [GIN-debug] POST   /metadata/:item_id        --> main.addMetadata (4 handlers)
+# [#Server running on port 8000
+#
+
+GET http://localhost:8080/items
+
+###
+
+GET http://localhost:8080/item/{itemID}
+
+###
+
+PATCH http://localhost:8080/item/{itemID}
+
+###
+
+POST http://localhost:8080/item
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": "midi1",
+  "name": "MidifileOne",
+  "metadata": [
+    {
+      "id": 1,
+      "key": "key",
+      "value": "value",
+      "type": "ordinal",
+      "item_id": 2
+    }
+  ]
+}
+###
+
+POST http://localhost:8080/metadata/{itemID}
+
+###
+
