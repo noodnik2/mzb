@@ -18,41 +18,22 @@ Ultimately, I'm looking to revive the utility of MZB: an easy-to-use
 
 Of course, since MZB's "heyday" (several decades ago!), lots of other great,
 similar apps have spawned.  One notable one I found is
-[NS MIDI Player](https://apps.nitinseshadri.com/midiplayer/)
-which I was able to try since it still supports older versions of MacOS
-(which I was using when I was looking around) via its
-[Legacy repo](https://github.com/nitinseshadri/NSMIDIPlayer-Legacy).
+[NS MIDI Player](https://apps.nitinseshadri.com/midiplayer/), which I found
+works pretty well.
 
-## `cmd/player` - Proof Of Concept
+## `cmd/player` - MIDI Source File Player
 
-The first CLI (PoC) created is `cmd/player`.  To run it:
+The first CLI (PoC) created is `cmd/player`, which is useful for serializing
+MIDI files out to a MIDI player, for example as configured in MacOS' [Audio MIDI Setup]
+app.  To run it, just give the target MIDI port where you want the MIDI events
+to be sent, and the list of MIDI file(s) to play on that target; e.g.:
 
 ```shell
-$ go run cmd/player/main.go one.mid two.mid ...
+$ go run cmd/player/main.go 1 one.mid two.mid ...
 ```
 
-Just give it a list of MIDI file(s) to play.
+The `1` value as the first parameter specifies "MIDI Port 1" for which a configured
+MIDI device / player is waiting to receive / play the MIDI event stream.
 
-As of this writing, it supports (only) the
-[`rtmididrv` driver](https://pkg.go.dev/gitlab.com/gomidi/midi/v2/drivers/rtmididrv),
-since that one seems to work out of the box with MacOS' "CoreMIDI" feature.
-
-### TODOs
-
-The initial version sounds _really_ bad compared to other players.
-
-- Maybe it's not sending through _sysex_?
-- Maybe it's not selecting the best patches?
-- ???
-
-### Dependencies
-
-Of course a working MIDI playback environment is needed to hear the MIDI files play.  
-
-The only setup currently tested is on MacOS by enabling the "IAC Driver" using the
-["Audio MIDI Setup"](https://support.apple.com/guide/audio-midi-setup/set-up-midi-devices-ams875bae1e0/mac)
-using the "MIDI Studio".  Once that driver is enabled, and with
-a loaded set of patches (such as those installed by GarageBand or perhaps FluidSynth),
-you should be able to play MIDI files using this CLI utility.
-
+[Audio MIDI Setup]: https://support.apple.com/guide/audio-midi-setup/set-up-midi-devices-ams875bae1e0/mac
 
